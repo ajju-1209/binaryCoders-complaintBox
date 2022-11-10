@@ -55,7 +55,7 @@ const ComplaintScreen = () => {
       dispatch(getRoles(['admin', 'resident']))
     if (!complaints)
       dispatch(getComplaints(['Pending', 'Assigned', 'Solved'], departmentChecked))
-  }, [complaints])
+  }, [])
 
   const applyFilter = () => {
     console.log(filters)

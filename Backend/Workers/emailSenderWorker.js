@@ -24,7 +24,7 @@ const sendEmailOnStatusChange = async () => {
       const queueBulkUpdateQuery = [];
       for (const record of records) {
         try {
-          await sendEmail();
+          await sendEmail(record.complaintId);
           queueBulkUpdateQuery.push({
             updateOne: {
               filter: {
