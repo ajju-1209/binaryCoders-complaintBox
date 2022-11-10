@@ -3,6 +3,7 @@ import { Select, MenuItem, FormControl, InputLabel, Card, Box, CardContent, Typo
 import { useSelector, useDispatch } from 'react-redux'
 import {updateComplaintAssigned} from '../actions/complaintActions'
 import Message from './Message'
+import TooltipComponent from './TooltipComponent'
 
 const ComplaintAdmin = ({ complaintData, allWorkers }) => {
     const dispatch = useDispatch()
@@ -54,12 +55,13 @@ const ComplaintAdmin = ({ complaintData, allWorkers }) => {
                                 sx={{ width: "200px" }}
                             >
                                 {workers && workers.map(worker => (
-                                    <MenuItem value={worker.email} key={worker.email} aria-owns={openPop ? 'mouse-over-popover' : undefined}
+                                    <MenuItem value={10}>
+                                        {/* value={worker.email} key={worker.email} aria-owns={openPop ? 'mouse-over-popover' : undefined}
                                         aria-haspopup="true"
                                         onMouseEnter={handlePopoverOpen}
-                                        onMouseLeave={handlePopoverClose}>
+                                        onMouseLeave={handlePopoverClose}> */}
                                         {worker.firstName}
-                                        <Popover
+                                        {/* <Popover
                                             id="mouse-over-popover"
                                             sx={{
                                                 pointerEvents: 'none',
@@ -83,7 +85,8 @@ const ComplaintAdmin = ({ complaintData, allWorkers }) => {
                                             </Typography>
                                             <Typography sx={{ p: 1 }}><b>Experience: </b>{worker.workerInfo.experience}
                                             </Typography>
-                                        </Popover>
+                                        </Popover> */}
+                                        <TooltipComponent workerData={worker} />
                                     </MenuItem>
                                 ))}
                             </Select>

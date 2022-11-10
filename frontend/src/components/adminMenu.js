@@ -48,7 +48,7 @@ function AdminMenu(props) {
 
   const drawer = (
     <div>
-      <Typography variant="h5" sx={{ marginLeft: "40px" }}>ADMIN ROLES</Typography>
+      <Typography variant="h5" sx={{ marginLeft: "40px",marginTop:"35px" }}>ADMIN ROLES</Typography>
       <Divider />
       <List>
         <ListItemButton>
@@ -79,12 +79,6 @@ function AdminMenu(props) {
           <Link to="../admin/ServicesScreen" style={{ textDecoration: "none", color: 'black' }}>
             <ListItemText primary="Standard Services" />
           </Link>
-        </ListItemButton>
-        <ListItemButton>
-          <ListItemIcon>
-            <DeleteIcon />
-          </ListItemIcon>
-          <ListItemText primary="Delete worker" />
         </ListItemButton>
       </List>
       {/* </Box> */}
