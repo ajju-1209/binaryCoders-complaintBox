@@ -39,16 +39,16 @@ const Announcement = ({ date, id, children, refresh }) => {
     handleClose()
   }
 
-  useEffect(() => {
-    //console.log(success, successUpdate)
-    if (success) {
-      refresh()
-      setOpenMessage(true)
-    }
-    // if (successUpdate)
-    //   refresh()
+  // useEffect(() => {
+  //   //console.log(success, successUpdate)
+  //   if (success) {
+  //     refresh()
+  //     setOpenMessage(true)
+  //   }
+  //   // if (successUpdate)
+  //   //   refresh()
 
-  }, [success, refresh]);
+  // }, [success, refresh]);
 
   const location = useLocation()
   return (
