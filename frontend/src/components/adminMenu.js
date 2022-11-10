@@ -38,7 +38,7 @@ function AdminMenu(props) {
   const navigate = useNavigate()
 
   const handleLogOut = () => {
-    navigate('/login')
+    navigate('/')
     dispatch(logout())
   }
 
@@ -48,7 +48,7 @@ function AdminMenu(props) {
 
   const drawer = (
     <div>
-      <Typography variant="h5" sx={{ marginLeft: "40px",marginTop:"35px" }}>ADMIN ROLES</Typography>
+      <Typography variant="h5" sx={{ marginLeft: "40px", marginTop: "35px" }}>ADMIN ROLES</Typography>
       <Divider />
       <List>
         <ListItemButton>

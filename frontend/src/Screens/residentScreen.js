@@ -50,7 +50,7 @@ const ResidentScreen = () => {
 
   useEffect(() => {
     if (!userInfo)
-      navigate('/login')
+      navigate('/')
     else if (!user.email) {
       dispatch(getUserDetails())
     } else {

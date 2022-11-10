@@ -5,17 +5,17 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { logout } from '../actions/userActions'
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import {Select, MenuItem,FormControl,OutlinedInput,InputLabel } from '@mui/material';
-import { useState,useEffect } from 'react';
-import {createRecord} from '../actions/workerFormActions'
+import { Select, MenuItem, FormControl, OutlinedInput, InputLabel } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { createRecord } from '../actions/workerFormActions'
 import Message from '../components/Message'
 import { useNavigate } from 'react-router-dom';
-import {getRoles} from '../actions/userRoleActions'
+import { getRoles } from '../actions/userRoleActions'
 
 export default function Header() {
   const dispatch = useDispatch()
@@ -27,10 +27,10 @@ export default function Header() {
   useEffect(() => {
     if (!roles)
       dispatch(getRoles(['admin', 'resident']))
-  },[])
+  }, [])
 
   const handleLogOut = () => {
-    navigate('/login')
+    navigate('/')
     dispatch(logout())
   }
 
@@ -62,10 +62,10 @@ export default function Header() {
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
 
-  const {success,error} = useSelector(state => state.createRecord)
+  const { success, error } = useSelector(state => state.createRecord)
   const handleSubmit = () => {
     handleClose()
-    dispatch(createRecord(inputs.profession,inputs.experience,inputs.referralID))
+    dispatch(createRecord(inputs.profession, inputs.experience, inputs.referralID))
   }
 
   const navigateHomePage = () => {
@@ -81,8 +81,8 @@ export default function Header() {
   }
   return (
     <div>
-      {success && <Message severity="success" message="Record Submitted" open={true}/>}
-      {error && <Message severity="error" message={error} open={true}/>}
+      {success && <Message severity="success" message="Record Submitted" open={true} />}
+      {error && <Message severity="error" message={error} open={true} />}
       <Dialog open={open}>
         <DialogTitle>JOIN US</DialogTitle>
         <DialogContent>

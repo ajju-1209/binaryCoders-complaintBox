@@ -44,7 +44,7 @@ const ServicesScreen = () => {
 
     useEffect(() => {
         if (!userInfo)
-            navigate('/login')
+            navigate('/')
         if (!services)
             handleRefreshServices()
         if (!roles)

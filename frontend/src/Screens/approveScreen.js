@@ -16,7 +16,7 @@ const ApproveScreen = () => {
   const { loading, records } = useSelector(state => state.getRecords)
   useEffect(() => {
     if (!userInfo)
-      navigate('/login')
+      navigate('/')
     if (!records)
       dispatch(getRecords(['Pending']))
   }, [])
