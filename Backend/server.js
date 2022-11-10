@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
+import path from 'path';
 import connectDB from "./Config/db.js";
 import { notFound, errorHandler } from "./Middleware/errorHandler.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -30,6 +31,8 @@ app.use("/api/workerData", workerFormRoutes);
 app.use("/api/queue", schedulingQueueRoutes);
 
 sendEmailOnStatusChangeWorker.start();
+
+const __dirname = path.resolve()
 //for creating production ready react app
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '/frontend/build')))
