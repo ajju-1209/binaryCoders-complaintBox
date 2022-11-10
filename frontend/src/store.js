@@ -1,11 +1,11 @@
 import thunk from "redux-thunk"
 import { configureStore } from '@reduxjs/toolkit'
-import { userRegisterReducer, userLoginReducer, updateUserProfileReducer, userDetailsReducer } from "./reducers/userReducers"
-import { getAllAnnouncementsReducer } from "./reducers/AnnouncementReducers"
+import { userRegisterReducer, userLoginReducer, updateUserProfileReducer, userDetailsReducer, updateUserRoleReducer, getWorkersReducer } from "./reducers/userReducers"
+import { getAllAnnouncementsReducer, deleteAnnouncementReducer, updateAnnouncementReducer, createAnnouncementReducer } from "./reducers/AnnouncementReducers"
 import { getRolesReducer } from "./reducers/userRoleReducer"
-import { getAllServicesReducer } from "./reducers/servicesReducers"
-import { createComplaintReducer, getComplaintsReducer, deleteComplaintReducer, getComplaintsWorkerReducer, updateComplaintSolvedReducer } from "./reducers/complaintReducers"
-import { createRecordReducer } from "./reducers/workerFormReducer"
+import { getAllServicesReducer, deleteServiceReducer, createServiceReducer } from "./reducers/servicesReducers"
+import { createComplaintReducer, getComplaintsReducer, deleteComplaintReducer, getComplaintsWorkerReducer, updateComplaintSolvedReducer, getComplaintsAdminReducer, updateComplaintAssignedReducer } from "./reducers/complaintReducers"
+import { createRecordReducer, getRecordsReducer, updateWorkerStatusReducer } from "./reducers/workerFormReducer"
 
 const reducer = {
     userRegister: userRegisterReducer,
@@ -20,7 +20,18 @@ const reducer = {
     deleteComplaint: deleteComplaintReducer,
     createRecord: createRecordReducer,
     getComplaintsWorker: getComplaintsWorkerReducer,
-    updateComplaintSolved: updateComplaintSolvedReducer
+    updateComplaintSolved: updateComplaintSolvedReducer,
+    getRecords: getRecordsReducer,
+    updateWorkerStatus: updateWorkerStatusReducer,
+    updateUserRole: updateUserRoleReducer,
+    deleteAnnouncement: deleteAnnouncementReducer,
+    updateAnnouncement: updateAnnouncementReducer,
+    createAnnouncement: createAnnouncementReducer,
+    getComplaintsAdmin: getComplaintsAdminReducer,
+    getWorkers: getWorkersReducer,
+    updateComplaintAssigned: updateComplaintAssignedReducer,
+    deleteService: deleteServiceReducer,
+    createService: createServiceReducer
 }
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null

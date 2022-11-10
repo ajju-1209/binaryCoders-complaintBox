@@ -265,7 +265,7 @@ const SignUpScreen = () => {
                   {loading && <Loader />}SIGN UP
                 </Button>
                 <p className="text-center" color="success">
-                  <Link to="/loginScreen">Already have an account? Login</Link>
+                  <Link to="/login">Already have an account? Login</Link>
                 </p>
               </Box>
             </form>

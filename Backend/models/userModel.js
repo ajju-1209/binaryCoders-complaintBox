@@ -38,8 +38,16 @@ const userSchema = mongoose.Schema({
 userSchema.virtual('userRoleInfo',{
     ref: 'Role',
     localField: 'userRole',
-    foreignField: 'slug'
+    foreignField: 'slug',
+    justOne: true
 });
+
+userSchema.virtual('workerInfo',{
+    ref: 'WorkerForm',
+    localField: 'email',
+    foreignField: 'email',
+    justOne: true
+})
 
 const User = mongoose.model('User', userSchema)
 export default User

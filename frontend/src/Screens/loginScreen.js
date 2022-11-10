@@ -12,11 +12,11 @@ import {
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo192 from "../assets/complaintLogo.jpg";
 import UseMediaQuery from "../utils/useMediaQuery";
-import {login} from '../actions/userActions'
+import { login } from '../actions/userActions'
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Message from "../components/Message";
@@ -38,7 +38,7 @@ const LoginScreen = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const {loading,userInfo,error} = useSelector(state => state.userLogin)
+  const { loading, userInfo, error } = useSelector(state => state.userLogin)
 
   useEffect(() => {
     if (userInfo) navigate("/resident/homePage");
@@ -47,7 +47,7 @@ const LoginScreen = () => {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(
-      login(inputs.email,inputs.password)
+      login(inputs.email, inputs.password)
     )
   };
   const handleClickShowPassword = () => {
@@ -58,7 +58,7 @@ const LoginScreen = () => {
   };
   return (
     <div style={{ backgroundColor: "#d3ebd3", margin: 0, height: "100vh" }}>
-      {error && <Message severity="error" message={error} />}
+      {error && <Message severity="error" message={error} open={true} />}
       <Grid container>
         <Grid item md={6} xs={12}>
           <form onSubmit={handleSubmit}>
@@ -108,35 +108,35 @@ const LoginScreen = () => {
                 />
               </FormControl>
 
-              <FormControl sx={{ width: "99%",marginTop:"2%" }} variant="outlined">
-                      <InputLabel htmlFor="outlined-adornment-password">
-                        Password
-                      </InputLabel>
-                      <OutlinedInput
-                        id="outlined-adornment-password"
-                        type={inputs.showPassword ? "text" : "password"}
-                        onChange={handleChange}
-                        name="password"
-                        value={inputs.password}
-                        required={true}
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <IconButton
-                              aria-label="toggle password visibility"
-                              onClick={handleClickShowPassword}
-                              edge="end"
-                            >
-                              {inputs.showPassword ? (
-                                <VisibilityOff />
-                              ) : (
-                                <Visibility />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        label="Password"
-                      />
-                    </FormControl>
+              <FormControl sx={{ width: "99%", marginTop: "2%" }} variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Password
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  type={inputs.showPassword ? "text" : "password"}
+                  onChange={handleChange}
+                  name="password"
+                  value={inputs.password}
+                  required={true}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        edge="end"
+                      >
+                        {inputs.showPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Password"
+                />
+              </FormControl>
               <Button
                 type="submit"
                 sx={{

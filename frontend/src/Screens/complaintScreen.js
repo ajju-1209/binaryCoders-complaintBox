@@ -58,6 +58,7 @@ const ComplaintScreen = () => {
   }, [complaints])
 
   const applyFilter = () => {
+    console.log(filters)
     dispatch(getComplaints(filters, departmentChecked))
   }
 

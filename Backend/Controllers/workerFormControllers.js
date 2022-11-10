@@ -37,16 +37,16 @@ const recordData = expressAsyncHandler(async(req,res) => {
 //@route /api/workerData/getRecords
 //@access ADMIN
 const getRecords = expressAsyncHandler(async(req,res) => {
-    const query = {}
-    if(Array.isArray(req.query.status)){
-        query.status = {$in:req.query.status}
-    }else if(req.query.status) {
-        query.workerStatus = {$in:[req.query.status]}
-    }
+    const query = {status: req.query.status}
+    // if(Array.isArray(req.query.status)){
+    //     query.status = {$in:req.query.status}
+    // }else if(req.query.status) {
+    //     query.workerStatus = {$in:[req.query.status]}
+    // }
     const data = await WorkerForm.find(query).populate([{path:"referralPersonInfo", select:"firstName phoneNumber address"},{path:"formFilledByPersonInfo", select:"firstName phoneNumber address"}])
 
     let Records = []
-    for(r of data) {
+    for( let r of data) {
         let info  = {}
         info.id = r.id
         info.email = r.email
@@ -54,19 +54,23 @@ const getRecords = expressAsyncHandler(async(req,res) => {
         info.profession = r.profession
         info.referralID = r.referralID
         info.referralPersonInfo = r.referralPersonInfo
+        info.experience = r.experience
         Records.push(info)
     }
     res.status(200).send(Records)
 })
 
 const updateStatus = expressAsyncHandler(async(req,res) => {
-    const record =await WorkerForm.findOne({id: req.body.id})
+    const record =await WorkerForm.findById(req.body.id)
     if(record) {
         record.status = req.body.status
         record.save()
         res.status(200).send({
-            message: "Status Updated"
+            message: "Status Updated",
+            status: record.status
         })
+    }else{
+        res.status(400).send("No Record Found!")
     }
 })
 export {recordData,getRecords,updateStatus}

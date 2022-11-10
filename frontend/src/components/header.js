@@ -11,14 +11,23 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {Select, MenuItem,FormControl,OutlinedInput,InputLabel } from '@mui/material';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import {createRecord} from '../actions/workerFormActions'
 import Message from '../components/Message'
 import { useNavigate } from 'react-router-dom';
+import {getRoles} from '../actions/userRoleActions'
 
 export default function Header() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const Roles = useSelector(state => state.getRoles)
+  const { roles } = Roles
+
+  useEffect(() => {
+    if (!roles)
+      dispatch(getRoles(['admin', 'resident']))
+  },[])
 
   const handleLogOut = () => {
     navigate('/login')
@@ -66,6 +75,10 @@ export default function Header() {
   const handleWorkerPage = () => {
     navigate('/worker/complaints')
   }
+
+  const handleAdminPage = () => {
+    navigate('/admin/approveScreen')
+  }
   return (
     <div>
       {success && <Message severity="success" message="Record Submitted" open={true}/>}
@@ -76,13 +89,16 @@ export default function Header() {
           <FormControl sx={{ width: "99%", marginTop: "1%" }}
             variant="outlined">
             <InputLabel htmlFor="profession">Profession</InputLabel>
-            <OutlinedInput
+            <Select
+              labelId="profession"
               id="profession"
               value={inputs.profession}
+              label="Profession"
               onChange={handleChange}
-              label="profession"
               name="profession"
-            />
+            >
+              {roles && roles.map(role => (<MenuItem value={role.slug} key={role.slug}>{role.name}</MenuItem>))}
+            </Select>
           </FormControl>
           <FormControl sx={{ width: "99%", marginTop: "2%" }} variant="outlined">
             <InputLabel htmlFor="Experience">Experience</InputLabel>
@@ -123,8 +139,9 @@ export default function Header() {
             <Typography variant="h5" component="div" sx={{ flexGrow: 1, marginLeft: "10px" }} onClick={navigateHomePage}>
               BINARY CODERS
             </Typography>
+            {userInfo.userRole === 'admin' && <Button color="inherit" onClick={handleAdminPage}>ADMIN PAGE</Button>}
             {userInfo.userRole !== 'resident' && userInfo.userRole !== 'admin' && <Button color="inherit" onClick={handleWorkerPage}>WORKER PAGE</Button>}
-            <Button color="inherit" onClick={handleJoinUs}>JOIN US</Button>
+            {userInfo.userRole === 'resident' && <Button color="inherit" onClick={handleJoinUs}>JOIN US</Button>}
             <Button color="inherit" onClick={handleLogOut}>LOGOUT</Button>
           </Toolbar>
         </AppBar>

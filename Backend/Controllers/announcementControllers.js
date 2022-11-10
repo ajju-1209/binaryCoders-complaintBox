@@ -5,18 +5,18 @@ import mongoose from "mongoose";
 //@desc create a new announcement
 //@route /api/announcement/create
 //@access Admin
-const createAnnouncement = expressAsyncHandler(async(req,res) => {
+const createAnnouncement = expressAsyncHandler(async (req, res) => {
     const announcement = await Announcement.create({
         madeBy: req.user.email,
         description: req.body.description
     })
-    if(announcement) {
+    if (announcement) {
         res.json({
             madeBy: announcement.madeBy,
             description: announcement.description,
             date: announcement.date
         })
-    }else{
+    } else {
         res.status(401)
         throw new Error('Invalid Data')
     }
@@ -25,14 +25,13 @@ const createAnnouncement = expressAsyncHandler(async(req,res) => {
 //@desc delete a announcement
 //@route /api/announcement/delete
 //@access Admin
-const deleteAnnouncement = expressAsyncHandler(async(req,res) => {
-    console.log(req.params.id)
-    try{
-        await Announcement.deleteOne({_id: new mongoose.Types.ObjectId(req.params.id)})
+const deleteAnnouncement = expressAsyncHandler(async (req, res) => {
+    try {
+        await Announcement.deleteOne({ _id: new mongoose.Types.ObjectId(req.params.id) })
         res.status(201).json({
             message: 'Announcement Deleted'
         })
-    }catch(e) {
+    } catch (e) {
         res.status(401)
         throw new Error('Announcement not Found')
     }
@@ -41,15 +40,15 @@ const deleteAnnouncement = expressAsyncHandler(async(req,res) => {
 //@desc update a announcement
 //@route /api/announcement/update
 //@access Admin
-const updateAnnouncement = expressAsyncHandler(async(req,res) => {
-    const announcement = await Announcement.findById(req.query.id)
-    if(announcement) {
+const updateAnnouncement = expressAsyncHandler(async (req, res) => {
+    const announcement = await Announcement.findById(req.body.id)
+    if (announcement) {
         announcement.description = req.body.description
         await announcement.save()
         res.json({
             message: 'Description Updated'
         })
-    }else{
+    } else {
         res.status(401)
         throw new Error('Announcement not Found')
     }
@@ -58,10 +57,10 @@ const updateAnnouncement = expressAsyncHandler(async(req,res) => {
 //@desc get all announcements sorted by date asc
 //@route /api/announcement/getAll
 //@access Protected
-const getAll = expressAsyncHandler(async(req,res) => {
-    const announcements = await Announcement.find({}).sort({date:-1})
+const getAll = expressAsyncHandler(async (req, res) => {
+    const announcements = await Announcement.find({}).sort({ date: -1 })
 
     res.json(announcements)
 })
 
-export {createAnnouncement,deleteAnnouncement,updateAnnouncement,getAll}
+export { createAnnouncement, deleteAnnouncement, updateAnnouncement, getAll }
