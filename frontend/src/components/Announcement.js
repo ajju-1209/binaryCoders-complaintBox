@@ -28,8 +28,8 @@ const Announcement = ({ date, id, children, refresh }) => {
 
   const dispatch = useDispatch()
   const { userInfo } = useSelector(state => state.userLogin)
-  const { success } = useSelector(state => state.deleteAnnouncement)
-  const { successUpdate } = useSelector(state => state.updateAnnouncement)
+  const { success, error: errorDelete } = useSelector(state => state.deleteAnnouncement)
+  const { successUpdate, error: errorUpdate } = useSelector(state => state.updateAnnouncement)
   const handleDeleteAnnouncement = () => {
     dispatch(deleteAnnouncement(id))
   }
@@ -40,12 +40,15 @@ const Announcement = ({ date, id, children, refresh }) => {
   }
 
   useEffect(() => {
+    //console.log(success, successUpdate)
     if (success) {
       refresh()
       setOpenMessage(true)
     }
+    // if (successUpdate)
+    //   refresh()
 
-  }, [success]);
+  }, [success, refresh]);
 
   const location = useLocation()
   return (

@@ -22,7 +22,8 @@ const AnnouncementScreen = () => {
         dispatch(getAllAnnouncements())
     }
 
-    const handleCreateAnnouncement = () => {
+    const handleCreateAnnouncement = (e) => {
+        e.preventDefault()
         dispatch(createAnnouncement(create))
         setCreate('')
     }
