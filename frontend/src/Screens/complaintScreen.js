@@ -58,8 +58,10 @@ const ComplaintScreen = () => {
   }, [])
 
   const applyFilter = () => {
-    console.log(filters)
-    dispatch(getComplaints(filters, departmentChecked))
+    if(filters.length === 0)
+      dispatch(getComplaints(['Pending', 'Assigned', 'Solved'], departmentChecked))
+    else
+      dispatch(getComplaints(filters, departmentChecked))
   }
 
   return (
