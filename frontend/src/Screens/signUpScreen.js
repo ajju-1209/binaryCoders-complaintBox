@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { useNavigate } from "react-router-dom";
-import {register} from "../actions/userActions.js";
+import { register } from "../actions/userActions.js";
 
 const SignUpScreen = () => {
   const [inputs, setInputs] = useState({
@@ -85,8 +85,8 @@ const SignUpScreen = () => {
 
   return (
     <>
-      {message && <Message severity="error" message={message} open={true}/>}
-      {error && <Message severity="error" message={error} open={true}/>}
+      {message && <Message severity="error" message={message} open={true} />}
+      {error && <Message severity="error" message={error} open={true} />}
       <div style={{ backgroundColor: "#d3ebd3", margin: 0, height: "100vh" }}>
         <Grid container>
           <Grid item md={6} xs={12}>
@@ -265,7 +265,7 @@ const SignUpScreen = () => {
                   {loading && <Loader />}SIGN UP
                 </Button>
                 <p className="text-center" color="success">
-                  <Link to="/login">Already have an account? Login</Link>
+                  <Link to="/">Already have an account? Login</Link>
                 </p>
               </Box>
             </form>

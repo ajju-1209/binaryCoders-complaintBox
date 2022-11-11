@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import AdminMenu from '../components/adminMenu';
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'

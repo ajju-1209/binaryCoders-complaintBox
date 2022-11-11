@@ -50,7 +50,7 @@ const ServicesScreen = () => {
         if (!roles)
             dispatch(getRoles(['admin', 'resident']))
         if (service)
-            handleRefreshServices()
+            window.location.reload();
     }, [service])
 
     const handleChecked = (event, key) => {
@@ -96,7 +96,7 @@ const ServicesScreen = () => {
                 <Grid item md={6}>
                     <Grid container direction="row">
                         {services && services.map(service => (<Grid item md={12} key={service.slug}>
-                            <Service serviceData={service} refresh={handleRefreshServices} />
+                            <Service serviceData={service} />
                         </Grid>))}
                     </Grid>
                 </Grid>

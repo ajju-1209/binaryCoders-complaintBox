@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, CardContent, Typography, Grid, Chip, ListItem } from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -19,6 +19,12 @@ const Complaints = ({ complaintData }) => {
 
   const dispatch = useDispatch()
   const { success } = useSelector(state => state.deleteComplaint)
+
+  useEffect(() => {
+    if (success)
+      window.location.reload()
+  }, [success])
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   }

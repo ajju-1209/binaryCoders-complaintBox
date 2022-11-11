@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from "react";
 import { getAllServices } from '../actions/servicesActions';
 import { createComplaint } from '../actions/complaintActions';
+import { useLocation } from 'react-router-dom';
 import Message from './Message'
 
 const RegisterComplaint = () => {
@@ -20,15 +21,16 @@ const RegisterComplaint = () => {
   const [value, setValue] = useState('');
 
   const dispatch = useDispatch()
+  const location = useLocation()
 
   const Roles = useSelector(state => state.getRoles)
   const { roles } = Roles
 
   const Services = useSelector(state => state.getAllServices)
   const { services } = Services
-  
-const Complaint = useSelector(state => state.createComplaint)
-const {success} = Complaint
+
+  const Complaint = useSelector(state => state.createComplaint)
+  const { success } = Complaint
 
   const [servicesChecked, setServicesChecked] = useState([])
 
@@ -43,6 +45,7 @@ const {success} = Complaint
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+  console.log(location)
 
   useEffect(() => {
     if (!roles)
@@ -51,10 +54,12 @@ const {success} = Complaint
       dispatch(getAllServices([value]))
       setServicesChecked([])
     }
-    if(success){
+    if (success) {
       setActiveStep(0)
     }
-  }, [dispatch, roles, value,success])
+    if (success && location.pathname === '/resident/complaints')
+      window.location.reload()
+  }, [dispatch, roles, value, success])
 
   const departments = (
     <React.Fragment>
@@ -91,7 +96,7 @@ const {success} = Complaint
 
   const registerComplaint = () => {
     let type, descriptionCustom, descriptionStandard = []
-    if(other) {
+    if (other) {
       type = "Custom"
       descriptionCustom = custom
     }
@@ -99,9 +104,9 @@ const {success} = Complaint
       type = "Standard"
       descriptionStandard = servicesChecked
     }
-    
-    dispatch(createComplaint(type,descriptionCustom,descriptionStandard,value))
-    
+
+    dispatch(createComplaint(type, descriptionCustom, descriptionStandard, value))
+
   }
 
   const register = (
@@ -136,7 +141,7 @@ const {success} = Complaint
 
   return (
     <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
-      {success && <Message severity="success" message="Complaint Registerd!" open={true}/>}
+      {success && <Message severity="success" message="Complaint Registerd!" open={true} />}
       <Paper
         square
         elevation={0}

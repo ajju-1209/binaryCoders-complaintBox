@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
     Select,
     MenuItem,
@@ -8,7 +8,6 @@ import {
     Box,
     CardContent,
     Typography,
-    Popover,
     Button,
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
@@ -30,17 +29,10 @@ const ComplaintAdmin = ({ complaintData, allWorkers }) => {
         setAssignTo(event.target.value);
     };
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handlePopoverOpen = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handlePopoverClose = () => {
-        setAnchorEl(null);
-    };
-
-    const openPop = Boolean(anchorEl);
+    useEffect(() => {
+        if (success)
+            window.location.reload();
+    }, [success])
 
     const handleAssign = () => {
         dispatch(updateComplaintAssigned(complaintData.id, assignTo));

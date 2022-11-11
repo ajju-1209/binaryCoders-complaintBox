@@ -1,4 +1,4 @@
-import { Status } from "../Constants/Constants.js";
+import { Status, ComplaintType } from "../Constants/Constants.js";
 import Complaint from "../models/complaintModel.js";
 import User from "../models/userModel.js";
 
@@ -8,6 +8,8 @@ const assignComplaint = async (forUserRole) => {
     .lean();
   const complaintCount = await Complaint.count({
     status: Status.solved,
+    complaintType: ComplaintType.standard,
+    issueType: forUserRole
   }).lean();
   if (users.length) {
     const userToAssignComplaint = users[complaintCount % users.length];
